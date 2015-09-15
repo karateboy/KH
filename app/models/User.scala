@@ -7,7 +7,6 @@ import models._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Json
-import Privilege._
 
 case class User(id: Option[Int], email: String, password: String, name: String, phone: String, isAdmin: Boolean, groupID: Int)
 

@@ -11,3 +11,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET		/login						controllers.Login.prompt
 GET		/logout						controllers.Login.logout
 POST	/authenticate				controllers.Login.authenticate
+
+GET		/QueryFactory				controllers.Application.factory
+GET		/FactoryReport/:name		controllers.Application.factoryReport(name)

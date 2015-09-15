@@ -22,27 +22,6 @@ object Application extends Controller {
   val title = "麥寮廠區空氣品質及氣象監測系統"
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
-  def index = Security.Authenticated.async {
-    implicit request =>
-      {
-        val url = "http://opendata.epa.gov.tw/ws/Data/AQX/?$orderby=SiteName&$skip=0&$top=1000&format=json"
-        WS.url(url).get().map {
-          response =>
-            val epaData = response.json.validate[Seq[EpaRealtimeData]]
-            epaData.fold(
-              error => {
-                Logger.error(JsError.toFlatJson(error).toString())
-                BadRequest(Json.obj("ok" -> false, "msg" -> JsError.toFlatJson(error)))
-              },
-              data => {
-                val kh_data = data.filter { d => d.county == "高雄市" }
-                Ok(views.html.index(kh_data))
-              })
-        }
-      }
-  }
-
-
   case class EpaRealtimeData(
     siteName: String,
     county: String,
@@ -71,4 +50,34 @@ object Application extends Controller {
       (__ \ "WindDirec").read[String] and
       (__ \ "PublishTime").read[String])(EpaRealtimeData.apply _)
 
+  def index = Security.Authenticated.async {
+    implicit request =>
+      {
+        val url = "http://opendata.epa.gov.tw/ws/Data/AQX/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+        WS.url(url).get().map {
+          response =>
+            val epaData = response.json.validate[Seq[EpaRealtimeData]]
+            epaData.fold(
+              error => {
+                Logger.error(JsError.toFlatJson(error).toString())
+                BadRequest(Json.obj("ok" -> false, "msg" -> JsError.toFlatJson(error)))
+              },
+              data => {
+                val kh_data = data.filter { d => d.county == "高雄市" }
+                Ok(views.html.index(kh_data))
+              })
+        }
+      }
+  }
+
+  def factory = Security.Authenticated {
+    implicit request =>
+       Ok(views.html.framework("", views.html.factory("")))
+  }
+  
+  def factoryReport(name:String) = Security.Authenticated {
+    implicit request =>
+      val factoryList = Factory.getFactoryByName(name)
+      Ok(views.html.framework("", views.html.factoryReport(factoryList)))
+  }
 }

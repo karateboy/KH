@@ -28,7 +28,7 @@ object Login extends Controller {
             else {
               val user = optUser.get
               import Security._
-              val userInfo = UserInfo(user.id.get, user.name, user.isAdmin, user.groupID)
+              val userInfo = UserInfo(user.id.get, user.name, user.isAdmin)
               Ok(Json.obj("ok"->true)).withSession(Security.setUserinfo(request, userInfo))              
             }              
           })

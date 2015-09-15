@@ -8,14 +8,14 @@ import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import play.api.libs.json.Json
 
-case class User(id: Option[Int], email: String, password: String, name: String, phone: String, isAdmin: Boolean, groupID: Int)
+case class User(id: Option[Int], email: String, password: String, name: String, phone: String, isAdmin: Boolean)
 
 object User {
   def newUser(user: User)(implicit session: DBSession = AutoSession) = {
     DB localTx { implicit session =>
       sql"""
         Insert into Users(email, name, password, phone, isAdmin, groupID)
-        Values(${user.email}, ${user.name}, ${user.password}, ${user.phone}, ${user.isAdmin}, ${user.groupID})
+        Values(${user.email}, ${user.name}, ${user.password}, ${user.phone}, ${user.isAdmin})
         """.update.apply
     }
   }
@@ -34,7 +34,7 @@ object User {
     DB localTx { implicit session =>
       sql"""
         Update Users
-        Set email=${user.email}, name=${user.name}, password=${user.password}, phone=${user.phone}, isAdmin=${user.isAdmin}, groupID=${user.groupID}
+        Set email=${user.email}, name=${user.name}, password=${user.password}, phone=${user.phone}, isAdmin=${user.isAdmin}
         Where id=${user.id.get}  
         """.update.apply
     }
@@ -47,8 +47,7 @@ object User {
       Where id=${id}
       """.map { r =>
       User(Some(r.int("ID")), r.string("Email"),
-        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"),
-        r.int("GroupID"))
+        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"))
     }.single.apply()
   }
 
@@ -59,8 +58,7 @@ object User {
       Where email=${email}
       """.map { r =>
       User(Some(r.int("ID")), r.string("Email"),
-        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"),
-        r.int("GroupID"))
+        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"))
     }.single.apply()
   }
 
@@ -70,8 +68,7 @@ object User {
       From Users
       """.map { r =>
       User(Some(r.int("ID")), r.string("Email"),
-        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"),
-        r.int("GroupID"))
+        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"))
     }.list.apply()
   }
 
@@ -82,8 +79,7 @@ object User {
       Where isAdmin = 1
       """.map { r =>
       User(Some(r.int("ID")), r.string("Email"),
-        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"),
-        r.int("GroupID"))
+        r.string("Password"), r.string("Name"), r.string("Phone"), r.boolean("isAdmin"))
     }.list.apply()
   }
   

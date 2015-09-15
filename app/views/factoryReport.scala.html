@@ -1,0 +1,33 @@
+@* factoryReport Template File *@
+@(factories: List[Factory])
+
+<table id="factoryReport" class="table">
+<thead>
+	<tr>
+		<th>代碼</th>
+		<th>工廠名稱</th>
+	</tr>
+</thead>
+<tbody>
+	@for(f<-factories){
+		<tr>
+			<td>@f.id</td>
+			<td>@f.name</td>
+		</tr>
+	}
+</tbody>
+</table>
+
+<script>
+$(document ).ready(function() {
+	$('#factoryReport').dataTable( {
+		responsive: true,
+		"dom": 'T&lt'+'clear'+'&gtlfrtip',
+		language: {
+			url: '@routes.Assets.at("localization/zh_tw.json")',							
+		},
+		"paging":   false,
+		searching: false
+	} );	
+});
+</script>

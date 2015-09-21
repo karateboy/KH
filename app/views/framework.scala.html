@@ -15,25 +15,25 @@
     <title>@title</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")" type="text/css">
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/bootstrap.min.css")" type="text/css">
 
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="@routes.Assets.at("font-awesome/css/font-awesome.min.css")" type="text/css">
+    <link rel="stylesheet" href="@routes.Assets.at("/public","font-awesome/css/font-awesome.min.css")" type="text/css">
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/animate.css")" type="text/css">
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/animate.css")" type="text/css">
     <!-- Data Tables -->
 
-    <link href='@routes.Assets.at("css/plugins/dataTables/dataTables.bootstrap.css")' rel="stylesheet">
-    <link href='@routes.Assets.at("css/plugins/dataTables/dataTables.responsive.css")' rel="stylesheet">
-    <link href='@routes.Assets.at("css/plugins/dataTables/dataTables.tableTools.min.css")' rel="stylesheet">
+    <link href='@routes.Assets.at("/public","css/plugins/dataTables/dataTables.bootstrap.css")' rel="stylesheet">
+    <link href='@routes.Assets.at("/public","css/plugins/dataTables/dataTables.responsive.css")' rel="stylesheet">
+    <link href='@routes.Assets.at("/public","css/plugins/dataTables/dataTables.tableTools.min.css")' rel="stylesheet">
 
-	<link href='@routes.Assets.at("css/plugins/dataTables/jquery.dataTables.min.css")' rel="stylesheet">
+	<link href='@routes.Assets.at("/public","css/plugins/dataTables/jquery.dataTables.min.css")' rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/creative.css")" type="text/css">
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/creative.css")" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,23 +42,23 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script src='@routes.Assets.at("js/jquery-2.1.4.min.js")'></script>
+    <script src='@routes.Assets.at("/public","js/jquery-2.1.4.min.js")'></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/bootstrap.min.js")"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="@routes.Assets.at("js/jquery.easing.min.js")"></script>
-    <script src="@routes.Assets.at("js/jquery.fittext.js")"></script>
-    <script src="@routes.Assets.at("js/wow.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/jquery.easing.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/jquery.fittext.js")"></script>
+    <script src="@routes.Assets.at("/public","js/wow.min.js")"></script>
 
    <!-- Data Tables -->
-    <script src='@routes.Assets.at("js/plugins/dataTables/jquery.dataTables.min.js")'></script>
-    <script src='@routes.Assets.at("js/plugins/dataTables/dataTables.bootstrap.js")'></script>
-    <script src='@routes.Assets.at("js/plugins/dataTables/dataTables.responsive.min.js")'></script>
+    <script src='@routes.Assets.at("/public","js/plugins/dataTables/jquery.dataTables.min.js")'></script>
+    <script src='@routes.Assets.at("/public","js/plugins/dataTables/dataTables.bootstrap.js")'></script>
+    <script src='@routes.Assets.at("/public","js/plugins/dataTables/dataTables.responsive.min.js")'></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="@routes.Assets.at("js/creative.js")"></script>    
+    <script src="@routes.Assets.at("/public","js/creative.js")"></script>    
 </head>
 
 <body id="page-top" class="main-bg">
@@ -78,7 +78,7 @@
     </nav>
 
     <section>
-        <div class="container">
+        <div class="container-fluid">
         	@content
         </div>
     </section>

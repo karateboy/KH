@@ -1,0 +1,125 @@
+@* factoryReport Template File *@
+@(queryType:QueryType.Value, envs: List[Env])
+
+<table id="factoryReport" class="table">
+<thead>
+	<tr>
+		<th rowspan='2'>採樣日期</th>
+		<th rowspan='2'>測點名稱</th>
+		<th rowspan='2'>採樣時間(小時)</th>
+		<th rowspan='2'>採樣方法</th>
+		@if(queryType == QueryType.Mass){
+			<th colspan='1' style="text-align: center">質量濃度分析(ug/m3)</th>
+		</tr>
+		<tr>
+			<th>PM2.5</th>				
+		}
+		@if(queryType == QueryType.Ion){
+			<th colspan='11' style="text-align: center">離子成分分析 (ug/m3)</th>
+		</tr>
+		<tr >
+			<th>F-</th>
+			<th>Cl-</th>
+			<th>Br-</th>
+			<th>NO2-</th>
+			<th>NO3-</th>
+			<th>SO42-</th>
+			<th>K+</th>
+			<th>Na+</th>
+			<th>NH4+</th>
+			<th>Ca2+</th>
+			<th>Mg2+</th>				
+		}
+		@if(queryType == QueryType.Metal){
+			<th colspan='14' style="text-align: center">金屬元素成分分析 (ug/m3)</th>
+		</tr>
+		<tr>
+			<th>Cr</th>
+			<th>Mn</th>
+			<th>Fe</th>
+			<th>Ni</th>
+			<th>Zn</th>
+			<th>Cd</th>
+			<th>Pb</th>
+			<th>Mg</th>
+			<th>K</th>
+			<th>V</th>
+			<th>Ca</th>
+			<th>Ti</th>
+			<th>Al</th>
+			<th>As</th>
+		}
+		@if(queryType == QueryType.Carbon){
+			<th colspan='3' style="text-align: center">碳成分分析 (ug/m3)</th>
+		</tr>
+		<tr>
+			<th>元素碳</th>
+			<th>有機碳</th>
+			<th>總碳</th>
+		}		
+	</tr>
+</thead>
+<tbody>
+	@for(p<-envs){
+		<tr>
+			<td>@p.date.toString("YYYY/MM/d")</td>
+			<td>@p.name</td>
+			<td>@Pipe.formatI(p.sampleHour)</td>
+			<td>@Pipe.formatS(p.sampleMethod)</td>
+			@if(queryType == QueryType.Mass){
+				<td>@Pipe.format(p.PM25)</td>
+			}
+			
+			@if(queryType == QueryType.Ion){
+				<td>@Pipe.format(p.F_ion, 3)</td>
+				<td>@Pipe.format(p.CL_ion, 3)</td>
+				<td>@Pipe.format(p.Br_ion, 3)</td>
+				<td>@Pipe.format(p.NO2_ion, 3)</td>
+				<td>@Pipe.format(p.NO3_ion, 3)</td>
+				<td>@Pipe.format(p.SO4_ion, 3)</td>
+				<td>@Pipe.format(p.K_ion, 3)</td>
+				<td>@Pipe.format(p.Na_ion, 3)</td>
+				<td>@Pipe.format(p.NH4_ion, 3)</td>
+				<td>@Pipe.format(p.Ca_ion, 3)</td>
+				<td>@Pipe.format(p.Mg_ion, 3)</td>
+			}
+			
+			@if(queryType == QueryType.Metal){
+				<td>@Pipe.format(p.Cr, 3)</td>
+				<td>@Pipe.format(p.Mn, 3)</td>
+				<td>@Pipe.format(p.Fe, 3)</td>
+				<td>@Pipe.format(p.Ni, 3)</td>
+				<td>@Pipe.format(p.Zn, 3)</td>
+				<td>@Pipe.format(p.Cd, 3)</td>
+				<td>@Pipe.format(p.Pb, 3)</td>
+				<td>@Pipe.format(p.Mg, 3)</td>
+				<td>@Pipe.format(p.k, 3)</td>
+				<td>@Pipe.format(p.V, 3)</td>
+				<td>@Pipe.format(p.Ca, 3)</td>
+				<td>@Pipe.format(p.Ti, 3)</td>
+				<td>@Pipe.format(p.Al, 3)</td>
+				<td>@Pipe.format(p.Arsenic, 3)</td>
+			}
+			@if(queryType == QueryType.Carbon){
+				<td>@Pipe.format(p.ElemCarbon, 3)</td>
+				<td>@Pipe.format(p.OrgCarbon, 3)</td>
+				<td>@Pipe.format(p.TotalCarbon, 3)</td>
+			}
+		</tr>
+	}
+</tbody>
+</table>
+
+<script>
+$(document ).ready(function() {
+	$('#factoryReport').dataTable( {
+		responsive: true,
+		"dom": 'T&lt'+'clear'+'&gtlfrtip',
+		language: {
+			url: '@routes.Assets.at("/public","localization/zh_tw.json")',							
+		},
+		"paging":   false,
+		searching: false
+	} );	
+});
+</script>

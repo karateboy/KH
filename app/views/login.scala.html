@@ -13,12 +13,12 @@
     <title>高雄市細懸浮微粒及汙染來源成因資訊平台</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet">
-	<link href='@routes.Assets.at("css/style.css")' rel="stylesheet">
-	<link href='@routes.Assets.at("css/aqm.css")' rel="stylesheet">
+    <link href="@routes.Assets.at("/public","css/bootstrap.min.css")" rel="stylesheet">
+	<link href='@routes.Assets.at("/public","css/style.css")' rel="stylesheet">
+	<link href='@routes.Assets.at("/public","css/aqm.css")' rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="@routes.Assets.at("font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
+    <link href="@routes.Assets.at("/public","font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,7 +32,7 @@
     		position: relative;
     		width: 100%;
     		height: 100%;
-    		background: url(@routes.Assets.at("images/bg.jpg")) no-repeat center center scroll;
+    		background: url(@routes.Assets.at("/public","images/bg.jpg")) no-repeat center center scroll;
     		-webkit-background-size: cover;
     		-moz-background-size: cover;
     		background-size: cover;
@@ -71,10 +71,10 @@
     </div>
 
     <!-- jQuery -->
-    <script src="@routes.Assets.at("js/jquery-2.1.4.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/jquery-2.1.4.min.js")"></script>
 	
     <!-- Bootstrap Core JavaScript -->
-    <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/bootstrap.min.js")"></script>
 
 	<script>
 	$( document ).ready(function() {
@@ -102,7 +102,7 @@
 				dataType: "json",
 				success: function(json){
 					if(json["ok"]==true){
-						$(location).attr('href',"/");
+						$(location).attr('href',"/dbIndex");
 					}else{
 						error_msg.css('display','block');
 						error_msg.text(json["msg"]);

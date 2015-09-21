@@ -1,0 +1,280 @@
+@* index2 Template File *@
+@import Application.EpaRealtimeData
+@(dataList: Seq[EpaRealtimeData])
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>高雄市細懸浮微粒及汙染來源成因資訊平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/bootstrap.min.css")" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@routes.Assets.at("/public","font-awesome/css/font-awesome.min.css")" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/animate.css")" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="@routes.Assets.at("/public","css/creative.css")" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top"><i class="fa fa-2x fa-home"></i></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#realtime">即時監測值</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#pipe_query">管道資料查詢</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#env_query">周界資料查詢</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">聯絡資訊</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>高雄市細懸浮微粒及汙染來源成因資訊平台</h1>
+                <hr>
+                <p></p>
+                <a href="#realtime" class="btn btn-primary btn-xl page-scroll">即時監測值</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="realtime">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">環保署高雄空氣品質即時監測值</h2>
+                    <hr class="light">
+					<table id="epaData" class="table">
+	<thead>
+		<tr>
+			<th>測站名稱</th>
+			<th>縣市</th>
+			<th>PSI</th>
+			<th>SO2</th>
+			<th>CO</th>
+			<th>O3</th>
+			<th>PM10</th>
+			<th>PM2.5</th>
+			<th>NO2</th>
+			<th>風速</th>
+			<th>風向</th>
+			<th>發布時間</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for(data<-dataList){
+			<tr>
+				<td>@data.siteName</td>
+				<td>@data.county</td>
+				<td>@data.psi</td>
+				<td>@data.so2</td>
+				<td>@data.co</td>
+				<td>@data.o3</td>
+				<td>@data.pm10</td>
+				<td>@data.pm25</td>
+				<td>@data.no2</td>
+				<td>@data.windSpeed</td>
+				<td>@data.windDir</td>
+				<td>@data.publishTime</td>
+			</tr>
+		}
+	</tbody>
+</table>
+					
+                    <a href="http://opendata.epa.gov.tw/Data/Contents/AQX" class="btn btn-default btn-xl">環保署-環境資源資料開放平台</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pipe_query">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">排放資料查詢</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryPipe/Mass">
+                        	<i class="fa fa-4x fa-building wow bounceIn text-primary"></i>
+                        	<h3>質量濃度分析</h3>
+                        	<p class="text-muted">查詢PM2.5質量濃度</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryPipe/Ion">
+                        	<i class="fa fa-4x fa-flask wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        	<h3>離子成分分析</h3>
+                        	<p class="text-muted">查詢離子成分分析</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryPipe/Metal">
+                        	<i class="fa fa-4x fa-tachometer wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        	<h3>金屬元素成分分析</h3>
+                        	<p class="text-muted">查詢金屬成分分析</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryPipe/Carbon">
+                        	<i class="fa fa-4x fa-diamond wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        	<h3>碳成分分析</h3>
+                        	<p class="text-muted">查詢碳成分分析</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="env_query">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center" style="color:#FFFFFF;">
+                    <h2 class="section-heading">周界資料查詢</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryEnv/Mass">
+                        	<i class="fa fa-4x fa-building wow bounceIn text-primary"></i>
+                        	<h3>質量濃度分析</h3>
+                        	<p class="text-muted">查詢PM2.5質量濃度分析</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryEnv/Ion">
+                        	<i class="fa fa-4x fa-flask wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        	<h3>離子成分分析</h3>
+                        	<p class="text-muted">查詢離子成分分析</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryEnv/Metal">
+                        	<i class="fa fa-4x fa-tachometer wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        	<h3>金屬元素成分分析</h3>
+                        	<p class="text-muted">查詢金屬成分分析</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    	<a href="/QueryEnv/Carbon">
+                        	<i class="fa fa-4x fa-diamond wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        	<h3>碳成分分析</h3>
+                        	<p class="text-muted">查詢碳成分分析</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">聯絡資訊</h2>
+                    <hr class="primary">
+                    <p>昱山環境技術服務顧問公司</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                    <p>02-2219-2886</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="mailto:wecc_sales@@wecc.com.tw">wecc_sales@@wecc.com.tw</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src='@routes.Assets.at("/public","js/jquery-2.1.4.min.js")'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="@routes.Assets.at("/public","js/bootstrap.min.js")"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="@routes.Assets.at("/public","js/jquery.easing.min.js")"></script>
+    <script src="@routes.Assets.at("/public","js/jquery.fittext.js")"></script>
+    <script src="@routes.Assets.at("/public","js/wow.min.js")"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="@routes.Assets.at("/public","js/creative.js")"></script>
+<script>
+
+</script>
+
+</body>
+
+</html>
+

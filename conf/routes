@@ -3,14 +3,25 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET		/							controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#Everyone's web
+GET		/epbkcg/index.html			controllers.Application.commonIndex
+GET		/epbkcg/*file				controllers.Assets.at(path="/public/epbkcg", file)
 
 GET		/login						controllers.Login.prompt
 GET		/logout						controllers.Login.logout
 POST	/authenticate				controllers.Login.authenticate
 
+GET		/dbIndex					controllers.Application.dbQueryIndex
 GET		/QueryFactory				controllers.Application.factory
 GET		/FactoryReport/:name		controllers.Application.factoryReport(name)
+
+GET		/QueryPipe/:queryType		controllers.Application.queryPipe(queryType)
+GET		/PipeReport/:queryType/:factory	controllers.Application.pipeReport(queryType, factory)
+
+GET		/QueryEnv/:queryType		controllers.Application.queryEnv(queryType)
+GET		/EnvReport/:queryType/:name	controllers.Application.envReport(queryType, name)

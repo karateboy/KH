@@ -1,0 +1,178 @@
+body{background:url(../images/master/bg.jpg) repeat;}
+
+.top{background:url(../images/master/top-bg.jpg) repeat-x;width:100%;height:41px;margin:0px;padding:0px; display:block;}
+
+.min-box{width:1000px;margin:0 auto;padding:0px;}
+
+.top-bnt{font-family:"微軟正黑體";padding-top:11px; float:right;}
+.top-bnt li{float:left; margin-right:10px;}
+.top-bnt li a{color:#48505e;text-decoration:none; }
+
+#item-101{background:url(../images/master/icon-home.png) no-repeat;width:18px;height:18px;padding-left:20px;}
+#item-102{background:url(../images/master/icon-link.png) no-repeat;width:18px;height:18px;padding-left:18px;}
+#item-103{background:url(../images/master/icon-map.png) no-repeat;width:18px;height:18px;padding-left:18px;}
+#item-104{background:url(../images/master/icon-site.png) no-repeat;width:18px;height:18px;padding-left:22px;}
+
+.header{width:1000px;margin:0 auto;}
+.logo{width:324px;height:66px;float:left; margin-top:10px;}
+
+.acca{color:#48505e;text-decoration:none;}
+.acca-2{color:#fff;text-decoration:none;font-size:13px;font-weight:100;}
+.acca-box{width:100%;clear:both;margin:4px 0;}
+/*==menu==*/
+.menu_box{list-style:none;margin:0px;float:right;}
+.menu_box li{float:left;position:relative;}
+.menu_box li a{display: block;}
+.menu_box > li > a:hover{}
+.menu_box li ul{display: none;float:left;position: absolute;margin: 0; z-index: 1;top:83px;}
+.menu_box li:hover > ul{display: block;list-style:none;}
+.menu_box li ul li{width:129px;clear:both;}
+.menu_box li ul li a{text-decoration:none;color:#fff;line-height:23px;background-color:#04a5be; border-bottom:1px solid #105e83; padding:8px 6px;}
+.menu_box li ul li a:hover{background-color:#105e83;}
+.menu_box ul li:last-child {border-bottom: none;}
+.menu_box ul li:hover > ul{display: block;position: absolute;top: 0;left: 100%;}
+
+#menu01{background:url(../images/master/menu01.jpg) no-repeat;width:129px;height:83px;display:inline-block;}
+#menu01:hover{background:url(../images/master/menu01-hover.jpg) no-repeat;}
+
+#menu01-h{background:url(../images/master/menu01-hover.jpg) no-repeat;width:129px;height:83px;display:inline-block;}
+
+#menu02{background:url(../images/master/menu02.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+#menu02:hover{background:url(../images/master/menu02-hover.jpg) no-repeat;}
+
+#menu02-h{background:url(../images/master/menu02-hover.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+
+#menu03{background:url(../images/master/menu03.jpg) no-repeat;width:129px;height:83px;display:inline-block;}
+#menu03:hover{background:url(../images/master/menu03-hover.jpg) no-repeat;}
+
+#menu03-h{background:url(../images/master/menu03-hover.jpg) no-repeat;width:129px;height:83px;display:inline-block;}
+
+#menu04{background:url(../images/master/menu04.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+#menu04:hover{background:url(../images/master/menu04-hover.jpg) no-repeat;}
+
+#menu04-h{background:url(../images/master/menu04-hover.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+
+#menu05{background:url(../images/master/menu05.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+#menu05:hover{background:url(../images/master/menu05-hover.jpg) no-repeat;}
+
+#menu05-h{background:url(../images/master/menu05-hover.jpg) no-repeat;width:128px;height:83px;display:inline-block;}
+
+.container{}
+
+.container-left{float:left;width:670px; margin-bottom:20px;}
+.container-right{float:right;width:300px; margin-bottom:20px;}
+.container-right table{width:300px;}
+.container-right table td{text-align:center;color:#fff;}
+.container-right table th{text-align:center;color:#fff;}
+.index-table01{background-color:#5c8310;}
+.index-table01 th{padding:28px 0;}
+.index-table02{background-color:#8ba802;}
+.index-table02 th{padding:12px 0;line-height:20px;border-left:1px solid #f2efde;border-bottom:1px solid #f2efde;}
+.index-text01{background-color:#5999ae;}
+.index-text01 td{padding:15px 0;line-height:20px;border-left:1px solid #f2efde;border-bottom:1px solid #f2efde;}
+.index-text02{background-color:#59adae;}
+.index-text02 td{padding:15px 0;line-height:20px;border-left:1px solid #f2efde;border-bottom:1px solid #f2efde;}
+
+.table-left{background:url(../images/index/table-left.jpg) no-repeat left bottom;}
+.table-right{background:url(../images/index/table-right.jpg) no-repeat right bottom;}
+
+.index-news-box{background-color:#97dde4; margin-bottom:15px;}
+.index-news-box h1{}
+.index-news-box h2{margin:8px 0 8px 10px;}
+.index-news-box ul{ width:650px; margin:0px auto;padding:10px 0;}
+.index-news-box ul li{background:url(../images/index/new-line.jpg) repeat-x left bottom;padding-bottom:5px; margin-bottom:8px;}
+.index-news-box ul li h3{color:#30848b;font-size:18px;margin:4px 0 5px 0;}
+.index-news-box ul li p{font-size:14px;color:#292929;line-height:22px;}
+
+.index-title01{background-color:#f2e685;width:359px; padding-bottom:22px; float:left;}
+.index-title01 img{ margin-bottom:10px;}
+
+.index-title01 a{background:url(../images/index/index-bnt01.jpg) no-repeat;width:332px;height:52px;color:#c7b10a;font-size:18px;font-weight:bold;display:block;line-height:52px;text-decoration:none; text-indent:40px; letter-spacing:1px; margin-left:14px;}
+
+.index-title01 a:hover{background:url(../images/index/index-bnt01-hover.jpg) no-repeat;color:#fff;}
+
+.index-title02{background-color:#dcf17f; width:300px; float:left;margin-left:10px;}
+.index-title02 img{margin-bottom:10px;}
+.index-title02 a{padding:0px 0px 0px 18px;}
+
+.index-link-bg{background:#fff url(../images/index/index-link-bg.jpg) repeat-x; width:100%;overflow:hidden; padding:18px 0 0 0;}
+.index-link-bg ul{width:1000px;margin:10px auto;}
+.index-link-bg ul li{float:left;margin:5px 2px;}
+
+.footer-img01{background:url(../images/master/bottom-bg.png) repeat-x;width:100%;height:47px;overflow:hidden;}
+
+.footer-bg{background-color:#4c6e0a;color:#fff; font-size:13px;padding:15px 0; overflow:auto;}
+.footer-bg h1{font-size:16px; padding:10px 0;}
+.footer-bg p{line-height:18px;}
+
+.footer-bg ul{float:right;}
+.footer-bg ul li{float:left;}
+.footer-bg ul li a{color:#fff;text-decoration:none;}
+.footer-link{float:right;margin-top:-80px; clear:both;}
+
+.left_block{width:216px;background:#9ddfe5 url(../images/legislation/legislation-left-bg.jpg) no-repeat left bottom; padding-bottom:250px; float:left;}
+.left_block h1{background-color:#30848b;padding:14px 0;text-indent:12px;color:#fff;font-family:"微軟正黑體";font-size:18px;font-weight:900;letter-spacing:1px;}
+
+.left_block-2{width:216px;float:left;}
+.left_block-2 h1{background-color:#30848b;padding:14px 0;text-indent:12px;color:#fff;font-family:"微軟正黑體";font-size:20px;font-weight:900;letter-spacing:1px;}
+
+.left_block ul{}
+.left_block ul li{background:#6eacb2 url(../images/legislation/legislation-left-bnt.jpg) no-repeat left bottom;}
+.left_block ul li a{width:192px;display:block;color:#fff;text-decoration:none;line-height:20px;padding:12px 0 12px 26px;background:url(../images/legislation/legislation-left-icon.jpg) no-repeat 10px center;}
+.left_block ul li a:hover{background:url(../images/legislation/legislation-left-icon-hover.jpg) no-repeat 10px center;}
+.left_block ul li ul{background-color:#30848b;padding:10px 0;}
+.left_block ul li ul li{margin-left:30px;background:none;}
+.left_block ul li ul li a{background:url(../images/tactics/tactics_icon.jpg) no-repeat left 12px;padding:4px 0 4px 10px;font-size:14px; width:170px;}
+.left_block ul li ul li a:hover{background:url(../images/tactics/tactics_icon.jpg) no-repeat left 12px;color:#e0eba0;}
+
+.left_block ul > .left_block-hover{background:#78b26e url(../images/legislation/legislation-left-bnt-hover.jpg) no-repeat left bottom;}
+
+.left-d-bnt{ margin:12px 0 0 9px;}
+.left-d-bnt img{margin:0px;padding:0px;}
+.left-d-bnt a{margin:0px;padding:0px;width:199px; height:44px; display:block;}
+.left-d-bnt a:hover{opacity:0.7;}
+.left-d-bnt h2{width:199px;height:57px;display:block;}
+
+.main_block{width:784px;float:left;}
+.main_block ol{margin-left:25px;list-style:decimal;}
+.main_block ol li{margin:2px 0 6px 0;color:#292929;font-size:14px;line-height:20px;}
+
+.location{background-color:#ace4e9; width:100%;padding:15px 0; height:18px;}
+.location ul{float:right;margin-right:10px;}
+.location ul li{color:#19464a;font-size:13px;float:left;margin:0 2px;}
+.location ul li a{color:#19464a;text-decoration:none;}
+
+.main_title{background:url(../images/legislation/legislation_min-title.png) no-repeat left bottom; color:#30848b;font-size:20px;font-weight:900; height:35px;text-indent:28px;line-height:24px;margin-bottom:10px;}
+
+.distance{padding:10px 15px; font-size:14px; line-height:20px;}
+
+.main_title02{background-color:#78b26e;padding:5px;color:#fff; display:inline-block; margin:10px auto;}
+
+.text01{text-align:right;font-size:15px;color:#599095;margin:2px 0;}
+.text02{text-align:center;font-size:16px;color:#858169;margin:2px 0;}
+.text03{text-align:center;font-size:16px;color:#599095;margin:2px 0;}
+.text04{text-align:center;font-size:16px;color:#292929;margin:6px 0 25px 0;background-color:#cad28f;border:1px solid #979c72;padding:8px 2px;}
+
+/*==top==*/
+.rightbtn{position:fixed;z-index:2;bottom:40px;right:20px;}
+.top-bntt{width:63px;height:63px;background:url(../images/top.png) no-repeat;display:block;/*position:fixed;right:0;top:260px;padding-right:20px;*/}
+.top-bntt:hover{ opacity:0.7;}
+
+.link-list{width:715px;margin:15px auto;}
+.link-list li{float:left;margin:10px 2px;margin-right:12px;}
+.link-list li h1{font-size:14px;color:#3f4540;text-align:center;width:161px;}
+
+.sitemap_desc_wrapper{border: 5px solid #c0bca3;color: #191919;margin-bottom: 10px; padding:15px; font-size:14px; line-height:20px;}
+.sitemap_desc_wrapper samp{color:#d52727;}
+
+.sitemap-d-l{float:left;}
+
+.sitemap01{margin:5px 35px 5px 0;}
+.sitemap01 a:hover{opacity:0.7;}
+.sitemap01 h1{ margin-bottom:6px;}
+.sitemap01 h1 a{padding:6px 6px 6px 13px;background:#8ca902 url(../images/sitemap/site-icon.jpg) no-repeat 8px 10px;color:#fff;font-size:15px;text-decoration:none;width:100%;border-radius:5px;display:block; text-indent:15px;}
+.sitemap01 h1 a:hover{opacity:0.7;}
+.sitemap01 ul{margin:0px 0 0 27px;}
+.sitemap01 ul li{background:url(../images/sitemap/site-icon02.jpg) no-repeat left 9px;padding:2px 0 0 10px;} 
+.sitemap01 ul li a{color:#4c6e0a;text-decoration:none;font-size:13px;}
+.sitemap01 ul li a:hover{color:#30848b;}

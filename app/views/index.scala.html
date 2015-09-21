@@ -1,303 +1,142 @@
-@* index2 Template File *@
+@* index Template File *@
 @import Application.EpaRealtimeData
 @(dataList: Seq[EpaRealtimeData])
-
-<!DOCTYPE html>
-<html lang="zh-tw">
-
+<!doctype html>
+<html>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>高雄市細懸浮微粒及汙染來源成因資訊平台</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")" type="text/css">
-
-    <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="@routes.Assets.at("font-awesome/css/font-awesome.min.css")" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/animate.css")" type="text/css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="@routes.Assets.at("css/creative.css")" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+<meta charset="utf-8">
+<title>高雄市細懸浮微粒PM2.5來源</title>
+<link href="css/ind.css" type="text/css" rel="stylesheet">
+<link href="css/reset.css" type="text/css" rel="stylesheet">
 </head>
 
-<body id="page-top">
+<body>
+<!--頁頭-->
+<div class="top"><div class="min-box">
+<ul class="top-bnt">
+<li><a class="acca" href="index.html" accesskey="U" title=":::(上方區塊)">:::</a></li>
+<li><a id="item-101" href="index.html" title="回首頁">回首頁</a></li>
+<li><a id="item-102" href="link.html" title="友善連結">友善連結</a></li>
+<li><a id="item-103" href="https://www.google.com.tw/maps/place/833%E9%AB%98%E9%9B%84%E5%B8%82%E9%B3%A5%E6%9D%BE%E5%8D%80%E6%BE%84%E6%B8%85%E8%B7%AF834%E8%99%9F/@@22.6475493,120.3471839,17z/data=!3m1!4b1!4m2!3m1!1s0x346e1b2a4ffdc86f:0x5f7e290e7d92451d?hl=zh-TW" target="_blank" title="交通位置">交通位置</a></li>
+<li><a id="item-104" href="sitemap.html" title="網站導覽">網站導覽</a></li>
+</ul>
+</div></div>
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top"><i class="fa fa-2x fa-home"></i></a>
-            </div>
+<div class="header">
+<div class="logo"><a href="index.html" accesskey="I"><img src="images/master/logo.png" title="高雄市政府環境保護局" alt="高雄市政府環境保護局"></a></div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#realtime">即時監測值</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#query">資料查詢</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#import">匯入資料</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">聯絡資訊</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+<ul class="menu_box">
+<li><a id="menu01" href="legislation.html" title="法規介紹" alt="法規介紹"></a></li>
+<li><a id="menu02" href="origin.html" title="來源介紹" alt="來源介紹"></a></li>
+<li><a id="menu03" href="tactics.html" title="管制策略" alt="管制策略"></a></li>
+<li><a id="menu04" href="propaganda.html" title="宣導資訊" alt="宣導資訊"></a></li>
+<li><a id="menu05" href="download.html" title="資料庫" alt="資料庫"></a>
+<ul>
+<li><a href="download.html" target="_blank" title="一般民眾">一般民眾</a></li>
+<li><a href="/login" title="管理單位" target="_blank">管理單位</a></li>
+</ul>
+</li>
+</ul>
+</div>
 
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <h1>高雄市細懸浮微粒及汙染來源成因資訊平台</h1>
-                <hr>
-                <p></p>
-                <a href="#realtime" class="btn btn-primary btn-xl page-scroll">即時監測值</a>
-            </div>
-        </div>
-    </header>
+<div class="min-box">
 
-    <section class="bg-primary" id="realtime">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">環保署高雄空氣品質即時監測值</h2>
-                    <hr class="light">
-					<table id="epaData" class="table">
-	<thead>
-		<tr>
-			<th>測站名稱</th>
-			<th>縣市</th>
-			<th>PSI</th>
-			<th>SO2</th>
-			<th>CO</th>
-			<th>O3</th>
-			<th>PM10</th>
-			<th>PM2.5</th>
-			<th>NO2</th>
-			<th>風速</th>
-			<th>風向</th>
-			<th>發布時間</th>
-		</tr>
-	</thead>
-	<tbody>
-		@for(data<-dataList){
-			<tr>
-				<td>@data.siteName</td>
-				<td>@data.county</td>
-				<td>@data.psi</td>
-				<td>@data.so2</td>
-				<td>@data.co</td>
-				<td>@data.o3</td>
-				<td>@data.pm10</td>
-				<td>@data.pm25</td>
-				<td>@data.no2</td>
-				<td>@data.windSpeed</td>
-				<td>@data.windDir</td>
-				<td>@data.publishTime</td>
+<div><img src="images/index/banner.jpg" title="細懸浮微粒PM2.5來源" alt="細懸浮微粒PM2.5來源"></div>
+       
+<div class="container">
+<div class="acca-box"><a class="acca" href="index.php" accesskey="C" title=":::(內容區塊)">:::</a></div>
+
+<div class="container-left">
+<div class="index-news-box">
+<h1><img src="images/index/index-news-title.jpg" title="最新消息" alt="最新消息"></h1>
+<h2><img src="images/index/index-news-banner.jpg" title="最新消息" alt="最新消息"></h2>
+<ul>
+<li>
+<h3>國外PM2.5相關法規</h3>
+<p>美國於1970年制定首部空污相關法律，同時也是最早進行細懸浮微粒(PM2.5)調查及規範的國家。1997年時提出PM2.5空氣品質標準規範，於日後多次修正檢討至目前最新標準...</p>
+</li>
+<li>
+<h3>國外PM2.5相關法規</h3>
+<p>美國於1970年制定首部空污相關法律，同時也是最早進行細懸浮微粒(PM2.5)調查及規範的國家。1997年時提出PM2.5空氣品質標準規範，於日後多次修正檢討至目前最新標準...</p>
+</li>
+</ul>
+</div>
+
+<div class="index-title01">
+<img src="images/index/index-title01.jpg" title="高雄市即時PM2.5資料查詢" alt="高雄市即時PM2.5資料查詢">
+<a href="http://ksenlab.ksepb.gov.tw/kh-taqm/zh-tw/Pm25Index.aspx" target="_blank" title="高雄市細懸浮微粒指標查詢(另開視窗)">高雄市細懸浮微粒指標查詢</a>
+<a href="http://taqm.epa.gov.tw/pm25/tw/PM25A.aspx?area=7" target="_blank" title="環保署細懸浮微粒濃度查詢(另開視窗)">環保署細懸浮微粒濃度查詢</a>
+</div>
+
+<div class="index-title02">
+<img src="images/index/index-title02.jpg" title="高雄市空氣品質即時通下載" alt="高雄市空氣品質即時通下載">
+
+<a href="https://itunes.apple.com/tw/app/gao-xiong-shi-kong-qi-pin/id765316578?l=zh&mt=8" target="_blank"><img src="images/index/ios-icon.jpg" title="ios下載(另開視窗)" alt="ios下載(另開視窗)"></a>
+<a href="https://play.google.com/store/apps/details?id=tw.gov.kcg.kaohsiungairtester&hl=zh-TW" target="_blank"><img src="images/index/android-icon.jpg" title="android下載(另開視窗)" alt="android下載(另開視窗)"></a>
+
+</div>
+
+</div>
+<div class="container-right">
+<table>
+<tr class="index-table01">
+<th colspan="3">高雄市即時空氣品質查詢</th>
+</tr>
+<tr class="index-table02">
+<th width="30%" class="table-left">測站</th>
+<th width="35%">空氣品質<br>指標PSI</th>
+<th width="35%" class="table-right">PM2.5<br>(μg/m  )</th>
+</tr>
+		@for(data<-dataList.zipWithIndex){			
+			@if(data._2 % 2 == 0){
+			<tr class="index-text01">			
+			}else{
+			<tr class="index-text02">
+			}
+				<td>@data._1.siteName</td>
+				<td>@data._1.psi</td>
+				@if(data._1.pm25.isEmpty){
+					<td>-</td>
+				}else{
+					<td>@data._1.pm25</td>
+				}
+				
 			</tr>
 		}
-	</tbody>
 </table>
-					
-                    <a href="http://opendata.epa.gov.tw/Data/Contents/AQX" class="btn btn-default btn-xl">環保署-環境資源資料開放平台</a>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
 
-    <section id="query">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">資料查詢</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                    	<a href="/QueryFactory">
-                        	<i class="fa fa-4x fa-building wow bounceIn text-primary"></i>
-                        	<h3>工廠查詢</h3>
-                        	<p class="text-muted">查詢管制工廠資訊</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                    	<a href="/QueryIon">
-                        	<i class="fa fa-4x fa-flask wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                        	<h3>離子成分分析</h3>
-                        	<p class="text-muted">查詢離子成分分析</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                    	<a href="/QueryMetal">
-                        	<i class="fa fa-4x fa-tachometer wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                        	<h3>金屬元素成分分析</h3>
-                        	<p class="text-muted">查詢金屬成分分析</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                    	<a href="/QueryCarbon">
-                        	<i class="fa fa-4x fa-diamond wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                        	<h3>碳成分分析</h3>
-                        	<p class="text-muted">查詢碳成分分析</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="index-link-bg">
+<ul>
+<h1><img src="images/index/link-title.jpg" title="友善連結" alt="友善連結"></h1>
+<li><a href="http://www.ksepb.gov.tw/" target="_blank"><img src="images/index/link01.jpg" title="高雄市環保局" alt="高雄市環保局"></a></li>
+<li><a href="http://ksenlab.ksepb.gov.tw/kh-taqm/zh-tw/fpmi.aspx" target="_blank"><img src="images/index/link02.jpg" title="高雄空品網頁" alt="高雄空品網頁"></a></li>
+<li><a href="http://kses.ksepb.gov.tw/kses/" target="_blank"><img src="images/index/link03.jpg" title="高雄市環保局統計資訊網" alt="高雄市環保局統計資訊網"></a></li>
+<li><a href="http://www.epa.gov.tw/np.asp?ctNode=31612&mp=epa" target="_blank"><img src="images/index/link04.jpg" title="行政院環保署" alt="行政院環保署"></a></li>
+<li><a href="http://air.epa.gov.tw/Public/ke_main.aspx" target="_blank"><img src="images/index/link05.jpg" title="環保署空氣品質品改善資訊網" alt="環保署空氣品質品改善資訊網"></a></li>
+<li><a href="http://air.ksepb.gov.tw/dispPageBox/AQMPHP.aspx?ddsPageID=AQMPHP" target="_blank"><img src="images/index/link06.jpg" title="空噪科空氣污染防制網頁" alt="空噪科空氣污染防制網頁"></a></li>
+</ul>
+<div class="footer-img01"></div>
+</div>
 
-    <section class="no-padding" id="import">
-	    <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">匯入資料</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="@routes.Assets.at("images/1.jpg")" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    匯入
-                                </div>
-                                <div class="project-name">
-                                    工廠資訊
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="@routes.Assets.at("images/2.jpg")" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    匯入
-                                </div>
-                                <div class="project-name">
-                                    採樣點資料
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href="#" class="portfolio-box">
-                        <img src="@routes.Assets.at("images/3.jpg")" class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    匯入
-                                </div>
-                                <div class="project-name">
-                                    其他資料
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-   <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">聯絡資訊</h2>
-                    <hr class="primary">
-                    <p>昱山環境技術服務顧問公司</p>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>02-2219-2886</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:wecc_sales@@wecc.com.tw">wecc_sales@@wecc.com.tw</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- jQuery -->
-    <script src='@routes.Assets.at("js/jquery-2.1.4.min.js")'></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="@routes.Assets.at("js/jquery.easing.min.js")"></script>
-    <script src="@routes.Assets.at("js/jquery.fittext.js")"></script>
-    <script src="@routes.Assets.at("js/wow.min.js")"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="@routes.Assets.at("js/creative.js")"></script>
-<script>
-$( document ).ready(function() {
-	$('#epaData').dataTable( {
-		responsive: true,
-		"dom": 'T<"clear">lfrtip',
-		language: {
-			url: '@routes.Assets.at("localization/zh_tw.json")',							
-		},
-		"tableTools": {
-        	"sSwfPath": "@routes.Assets.at("js/plugins/dataTables/swf/copy_csv_xls_pdf.swf")"
-        },
-		"paging":   false,
-		"searching": false
-	} );		
-});
-</script>
-
+<div class="footer-bg"><div class="min-box">
+<div class="acca-box"><a class="acca-2" href="index.php" accesskey="B" title=":::(下方區塊)">:::</a></div>
+<div style="float:left;">
+<h1>高雄市政府環境保護局</h1>
+<p>建議螢幕解析度1024*768 IE7.0以上<br>
+地址：83347高雄市鳥松區澄清路834號<br>
+電話：07-7351500 公害檢舉專線(24小時)：0800-066666、07-7317600<br>
+本網站內容所有權歸高雄市政府環境保護局所有.請尊重智慧財產權，未經允許請勿任意轉載、複製或做商業用途
+</p></div>
+<ul>
+<li><a href="Privacy.html" title="隱私權及資訊安全宣告">隱私權及資訊安全宣告</a></li>
+<li>│</li>
+<li><a href="Copyright.html" title="著作權聲明">著作權聲明</a></li>
+</ul>
+<a href="" target="_blank" class="footer-link"><img src="images/master/coessibillty.jpg" title="通過A+無障礙網站檢測(另開視窗)" alt="通過A+無障礙網站檢測(另開視窗)"></a>
+</div></div>
+       
 </body>
-
 </html>
-

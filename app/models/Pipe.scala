@@ -58,4 +58,27 @@ object Pipe {
           r.floatOpt(31),r.floatOpt(32),r.floatOpt(33),r.floatOpt(34),r.floatOpt(35))
     }.list().apply()
   }
+  
+  def formatI(v:Option[Int])={
+    if(v.isEmpty)
+      "-"
+    else
+      v.get.toString()
+  }
+  
+  def formatS(v:Option[String])={
+    if(v.isEmpty)
+      "-"
+    else
+      v.get
+  }
+  
+  def format(v:Option[Float], p:Int=0)={
+    if(v.isEmpty)
+      "-"
+    else if(v.get == 0)
+      "ND"
+    else
+      s"%.${p}f".format(v.get)
+  }
 }

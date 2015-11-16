@@ -89,6 +89,7 @@
 <th width="35%">空氣品質<br>指標PSI</th>
 <th width="35%" class="table-right">PM2.5<br>(μg/m  )</th>
 </tr>
+	@if(dataList.length != 0){
 		@for(data<-dataList.zipWithIndex){			
 			@if(data._2 % 2 == 0){
 			<tr class="index-text01">			
@@ -105,6 +106,11 @@
 				
 			</tr>
 		}
+	}else{
+		<tr class="index-text01">
+			<td>環保署網站維修中</td><td>-</td><td>-</td>
+		</tr>
+	}
 </table>
 </div>
 </div>

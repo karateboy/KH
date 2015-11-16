@@ -63,23 +63,29 @@ object Application extends Controller {
     implicit request =>
       Redirect("/epbkcg/index.html")
   }
-  
-  def commonIndex = Action.async{
-        implicit request =>
+
+  def commonIndex = Action.async {
+    implicit request =>
       {
         val url = "http://opendata.epa.gov.tw/ws/Data/AQX/?$orderby=SiteName&$skip=0&$top=1000&format=json"
         WS.url(url).get().map {
           response =>
-            val epaData = response.json.validate[Seq[EpaRealtimeData]]
-            epaData.fold(
-              error => {
-                Logger.error(JsError.toFlatJson(error).toString())
-                BadRequest(Json.obj("ok" -> false, "msg" -> JsError.toFlatJson(error)))
-              },
-              data => {
-                val kh_data = data.filter { d => d.county == "高雄市" }
-                Ok(views.html.index(kh_data))
-              })
+            try {
+              val epaData = response.json.validate[Seq[EpaRealtimeData]]
+              epaData.fold(
+                error => {
+                  Logger.error(JsError.toFlatJson(error).toString())
+                  Ok(views.html.index(Seq.empty[EpaRealtimeData]))
+                },
+                data => {
+                  val kh_data = data.filter { d => d.county == "高雄市" }
+                  Ok(views.html.index(kh_data))
+                })
+            }catch{
+              case ex:Exception=>
+                Logger.error(ex.toString())
+                Ok(views.html.index(Seq.empty[EpaRealtimeData]))
+            }
         }
       }
   }

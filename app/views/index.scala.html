@@ -99,11 +99,24 @@
 			<tr class="index-text02">
 			}
 				<td>@data._1.siteName</td>
-				<td>@data._1.psi</td>
+				@if(data._1.psi.toFloat > 100){
+					<td style="Color:Red">@data._1.psi</td>	
+				}else{
+					@if(data._1.psi.toFloat == 0){
+						<td>-</td>
+					}else{
+						<td>@data._1.psi</td>
+					}
+				}
+				
 				@if(data._1.pm25.isEmpty){
 					<td>-</td>
 				}else{
-					<td>@data._1.pm25</td>
+					@if(data._1.pm25.toFloat > 35){
+						<td style="Color:Red">@data._1.pm25</td>
+					}else{
+						<td>@data._1.pm25</td>
+					}					
 				}
 				
 			</tr>

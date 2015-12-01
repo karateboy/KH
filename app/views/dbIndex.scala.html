@@ -1,6 +1,6 @@
 @* index2 Template File *@
 @import Application.EpaRealtimeData
-@(dataList: Seq[EpaRealtimeData])
+@(dataList: Seq[EpaRealtimeData])(implicit request: play.api.mvc.RequestHeader)
 
 <!DOCTYPE html>
 <html lang="zh-tw">
@@ -236,7 +236,15 @@
             </div>
         </div>
     </section>
-
+	<script>
+		var host = "@request.host";
+		console.log(host);
+		var hosts = host.split(":");
+		var domain = hosts[0];
+		function getDocUrl(){
+			return "http://" + domain + ":8000/";
+		}
+	</script>
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -244,6 +252,7 @@
                     <h2 class="section-heading">聯絡資訊</h2>
                     <hr class="primary">
                     <p>昱山環境技術服務顧問公司</p>
+                    <label class="primary"><a id="docUrl" href="#">報告下載</a></label>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
@@ -271,7 +280,9 @@
     <!-- Custom Theme JavaScript -->
     <script src="@routes.Assets.at("/public","js/creative.js")"></script>
 <script>
-
+$( document ).ready(function() {
+	$("#docUrl").prop("href", getDocUrl());
+});
 </script>
 
 </body>

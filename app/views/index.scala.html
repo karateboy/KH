@@ -1,6 +1,5 @@
 @* index Template File *@
-@import Application.EpaRealtimeData
-@(dataList: Seq[EpaRealtimeData])
+@(dataList: Seq[AQIrecord])
 <!doctype html>
 <html>
 <head>
@@ -86,12 +85,14 @@
 <div class="container-right">
 <table>
 <tr class="index-table01">
-<th colspan="3">高雄市即時空氣品質查詢</th>
+<th colspan="5">高雄市即時空氣品質查詢</th>
 </tr>
 <tr class="index-table02">
-<th width="30%" class="table-left">測站</th>
-<th width="35%">空氣品質<br>指標PSI</th>
-<th width="35%" class="table-right">PM2.5<br>(μg/m  )</th>
+<th class="table-left">測站</th>
+<th>空氣品質<br>指標AQI</th>
+<th>汙染物</th>
+<th>狀態</th>
+<th>PM2.5</th>
 </tr>
 	@if(dataList.length != 0){
 		@for(data<-dataList.zipWithIndex){			
@@ -100,27 +101,11 @@
 			}else{
 			<tr class="index-text02">
 			}
-				<td>@data._1.siteName</td>
-				@if(data._1.psi.toFloat > 100){
-					<td style="Color:Red">@data._1.psi</td>	
-				}else{
-					@if(data._1.psi.toFloat == 0){
-						<td>-</td>
-					}else{
-						<td>@data._1.psi</td>
-					}
-				}
-				
-				@if(data._1.pm25.isEmpty){
-					<td>-</td>
-				}else{
-					@if(data._1.pm25.toFloat > 35){
-						<td style="Color:Red">@data._1.pm25</td>
-					}else{
-						<td>@data._1.pm25</td>
-					}					
-				}
-				
+				<td>@data._1.SiteName</td>				
+				<td style="@AQI.getAQIstyle(data._1.AQI)">@data._1.AQI</td>	
+				<td>@data._1.Pollutant</td>
+				<td>@data._1.Status</td>
+				<td>@data._1.PM25</td>				
 			</tr>
 		}
 	}else{

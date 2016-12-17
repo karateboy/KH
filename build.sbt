@@ -5,24 +5,23 @@ version := "1.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
   jdbc,
-  anorm,
   cache,
   ws,
-  "org.scalikejdbc" %% "scalikejdbc"       			% "2.2.6",
-  "org.scalikejdbc" %% "scalikejdbc-config"			% "2.2.6",
-  "org.scalikejdbc" %% "scalikejdbc-play-plugin"	% "2.3.6",
-  "org.scalikejdbc" %% "scalikejdbc-play-dbplugin-adapter" % "2.3.6",
-  "com.github.nscala-time" %% "nscala-time" % "2.0.0",
+  jdbc,
+  cache,
+  ws,
+  "org.scalikejdbc" %% "scalikejdbc"                  % "2.4.1",
+  "org.scalikejdbc" %% "scalikejdbc-config"           % "2.4.1",
+  "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.5.1",
+  "com.github.nscala-time" %% "nscala-time" % "2.12.0",  
   "io.github.cloudify" %% "spdf" % "1.3.1"
 )
 
-PlayKeys.playWatchService := play.sbtplugin.run.PlayWatchService.sbt(pollInterval.value)
-
-scalikejdbcSettings
+PlayKeys.fileWatchService := play.runsupport.FileWatchService.sbt(2000)
 
 scalacOptions += "-feature"
 

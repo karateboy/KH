@@ -18,33 +18,50 @@ import scala.concurrent.Future
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 
-object QueryType extends Enumeration{
+object QueryType extends Enumeration {
   val Mass = Value
   val Ion = Value
   val Metal = Value
   val Carbon = Value
-  val descMap = Map(Mass->"質量濃度分析", Ion->"離子成分分析", Metal->"金屬元素成分分析", Carbon->"碳成分分析")
+  val descMap = Map(Mass -> "質量濃度分析", Ion -> "離子成分分析", Metal -> "金屬元素成分分析", Carbon -> "碳成分分析")
 }
+
+case class RealtimeAQI(success: Boolean, result:AQIResult)
+case class AQIResult(records: Seq[AQIrecord])
+case class AQIrecord(SiteName: String, County: String, AQI: String, Pollutant: String,
+                     Status: String, PM25: String,
+                     PublishTime: String)
+
+case class EpaRealtimeData(
+  siteName: String,
+  county: String,
+  psi: String,
+  so2: String,
+  co: String,
+  o3: String,
+  pm10: String,
+  pm25: String,
+  no2: String,
+  windSpeed: String,
+  windDir: String,
+  publishTime: String)
 
 object Application extends Controller {
 
-  val title = "麥寮廠區空氣品質及氣象監測系統"
+  val title = "高雄PM2.5監測系統"
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
-
-  case class EpaRealtimeData(
-    siteName: String,
-    county: String,
-    psi: String,
-    so2: String,
-    co: String,
-    o3: String,
-    pm10: String,
-    pm25: String,
-    no2: String,
-    windSpeed: String,
-    windDir: String,
-    publishTime: String)
-
+  implicit val aqiRecordRead : Reads[AQIrecord] =
+    ((__ \ "SiteName").read[String] and
+      (__ \ "County").read[String] and
+      (__ \ "AQI").read[String] and
+      (__ \ "Pollutant").read[String] and
+      (__ \ "Status").read[String] and
+      (__ \ "PM2.5").read[String] and
+      (__ \ "PublishTime").read[String])(AQIrecord.apply _)
+      
+  implicit val aqiResult = Json.reads[AQIResult]
+  implicit val realtimAQIread = Json.reads[RealtimeAQI]
+  
   implicit val epaRealtimeDataRead: Reads[EpaRealtimeData] =
     ((__ \ "SiteName").read[String] and
       (__ \ "County").read[String] and
@@ -59,7 +76,8 @@ object Application extends Controller {
       (__ \ "WindDirec").read[String] and
       (__ \ "PublishTime").read[String])(EpaRealtimeData.apply _)
 
-  def index = Action{
+  
+  def index = Action {
     implicit request =>
       Redirect("/epbkcg/index.html")
   }
@@ -67,40 +85,40 @@ object Application extends Controller {
   def commonIndex = Action.async {
     implicit request =>
       {
-        val url = "http://opendata.epa.gov.tw/ws/Data/AQX/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+        val url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-001805/?format=json&token=00k8zvmeJkieHA9w13JvOw"
         WS.url(url).get().map {
           response =>
             try {
-              val epaData = response.json.validate[Seq[EpaRealtimeData]]
-              epaData.fold(
+              val aqiResult = response.json.validate[RealtimeAQI]
+              aqiResult.fold(
                 error => {
-                  Logger.error(JsError.toFlatJson(error).toString())
-                  Ok(views.html.index(Seq.empty[EpaRealtimeData]))
+                  Logger.error(JsError.toJson(error).toString())
+                  Ok(views.html.index(Seq.empty[AQIrecord]))
                 },
-                data => {
-                  val kh_data = data.filter { d => d.county == "高雄市" }
+                aqiData => {
+                  val kh_data = aqiData.result.records.filter { d => d.County == "高雄市" }
                   Ok(views.html.index(kh_data))
                 })
-            }catch{
-              case ex:Exception=>
+            } catch {
+              case ex: Exception =>
                 Logger.error(ex.toString())
-                Ok(views.html.index(Seq.empty[EpaRealtimeData]))
+                Ok(views.html.index(Seq.empty[AQIrecord]))
             }
         }
       }
   }
-  
+
   def dbQueryIndex = Security.Authenticated.async {
     implicit request =>
       {
-        val url = "http://opendata.epa.gov.tw/ws/Data/AQX/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+        val url = "http://opendata2.epa.gov.tw/AQX.json"
         WS.url(url).get().map {
           response =>
             val epaData = response.json.validate[Seq[EpaRealtimeData]]
             epaData.fold(
               error => {
-                Logger.error(JsError.toFlatJson(error).toString())
-                BadRequest(Json.obj("ok" -> false, "msg" -> JsError.toFlatJson(error)))
+                Logger.error(JsError.toJson(error).toString())
+                BadRequest(Json.obj("ok" -> false, "msg" -> JsError.toJson(error)))
               },
               data => {
                 val kh_data = data.filter { d => d.county == "高雄市" }
@@ -112,38 +130,38 @@ object Application extends Controller {
 
   def factory = Security.Authenticated {
     implicit request =>
-       Ok(views.html.framework("", views.html.factory("")))
+      Ok(views.html.framework("", views.html.factory("")))
   }
-  
-  def factoryReport(name:String) = Security.Authenticated {
+
+  def factoryReport(name: String) = Security.Authenticated {
     implicit request =>
       val factoryList = Factory.getFactoryByName(name)
       Ok(views.html.framework("", views.html.factoryReport(factoryList)))
   }
-  
-  def queryPipe(queryTypeStr:String) = Security.Authenticated {
+
+  def queryPipe(queryTypeStr: String) = Security.Authenticated {
     implicit request =>
-    val queryType = QueryType.withName(queryTypeStr)
-    val title = "管道" + QueryType.descMap(queryType)
-       Ok(views.html.framework(title, views.html.pipe(queryType.toString)))
+      val queryType = QueryType.withName(queryTypeStr)
+      val title = "管道" + QueryType.descMap(queryType)
+      Ok(views.html.framework(title, views.html.pipe(queryType.toString)))
   }
-  
-  def pipeReport(queryTypeStr:String, name:String) = Security.Authenticated {
+
+  def pipeReport(queryTypeStr: String, name: String) = Security.Authenticated {
     implicit request =>
       val queryType = QueryType.withName(queryTypeStr)
       val pipeList = Pipe.getPipeByName(name)
       val title = "管道" + QueryType.descMap(queryType)
       Ok(views.html.framework(title, views.html.pipeReport(queryType, pipeList)))
   }
-  
-  def queryEnv(queryTypeStr:String) = Security.Authenticated {
+
+  def queryEnv(queryTypeStr: String) = Security.Authenticated {
     implicit request =>
-    val queryType = QueryType.withName(queryTypeStr)
-    val title = "周界" + QueryType.descMap(queryType)
-       Ok(views.html.framework(title, views.html.env(queryType.toString)))
+      val queryType = QueryType.withName(queryTypeStr)
+      val title = "周界" + QueryType.descMap(queryType)
+      Ok(views.html.framework(title, views.html.env(queryType.toString)))
   }
 
-  def envReport(queryTypeStr:String, name:String) = Security.Authenticated {
+  def envReport(queryTypeStr: String, name: String) = Security.Authenticated {
     implicit request =>
       val queryType = QueryType.withName(queryTypeStr)
       val envList = Env.getEnvByName(name)
@@ -151,7 +169,7 @@ object Application extends Controller {
       Ok(views.html.framework(title, views.html.envReport(queryType, envList)))
   }
 
-  def epbkcg(filePath:String)=Action{
+  def epbkcg(filePath: String) = Action {
     implicit request =>
       Ok("")
   }

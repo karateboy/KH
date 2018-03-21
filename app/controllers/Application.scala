@@ -8,15 +8,13 @@ import com.github.nscala_time.time.Imports._
 import models.ModelHelper._
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
-import play.api.libs.json.Json
 import play.api.Play.current
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.ws._
 import play.api.libs.ws.ning.NingAsyncHttpClientConfigBuilder
-import scala.concurrent.Future
-import play.api.libs.json._
-import play.api.libs.functional.syntax._
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import scala.concurrent._
 
 object QueryType extends Enumeration {
   val Mass = Value
@@ -26,7 +24,7 @@ object QueryType extends Enumeration {
   val descMap = Map(Mass -> "質量濃度分析", Ion -> "離子成分分析", Metal -> "金屬元素成分分析", Carbon -> "碳成分分析")
 }
 
-case class RealtimeAQI(success: Boolean, result:AQIResult)
+case class RealtimeAQI(success: Boolean, result: AQIResult)
 case class AQIResult(records: Seq[AQIrecord])
 case class AQIrecord(SiteName: String, County: String, AQI: String, Pollutant: String,
                      Status: String, PM25: String,
@@ -49,33 +47,20 @@ case class EpaRealtimeData(
 object Application extends Controller {
 
   val title = "高雄PM2.5監測系統"
-  import play.api.libs.concurrent.Execution.Implicits.defaultContext
-  implicit val aqiRecordRead : Reads[AQIrecord] =
-    ((__ \ "SiteName").read[String] and
-      (__ \ "County").read[String] and
-      (__ \ "AQI").read[String] and
-      (__ \ "Pollutant").read[String] and
-      (__ \ "Status").read[String] and
-      (__ \ "PM2.5").read[String] and
-      (__ \ "PublishTime").read[String])(AQIrecord.apply _)
-      
+
+//  implicit val aqiRecordRead: Reads[AQIrecord] =
+//    ((__ \ "SiteName").read[String] and
+//      (__ \ "County").read[String] and
+//      (__ \ "AQI").read[String] and
+//      (__ \ "Pollutant").read[String] and
+//      (__ \ "Status").read[String] and
+//      (__ \ "PM2.5").read[String] and
+//      (__ \ "PublishTime").read[String])(AQIrecord.apply _)
+
+  implicit val aqiRecordReads = Json.reads[AQIrecord]
   implicit val aqiResult = Json.reads[AQIResult]
   implicit val realtimAQIread = Json.reads[RealtimeAQI]
-  
-  implicit val epaRealtimeDataRead: Reads[EpaRealtimeData] =
-    ((__ \ "SiteName").read[String] and
-      (__ \ "County").read[String] and
-      (__ \ "PSI").read[String] and
-      (__ \ "SO2").read[String] and
-      (__ \ "CO").read[String] and
-      (__ \ "O3").read[String] and
-      (__ \ "PM10").read[String] and
-      (__ \ "PM2.5").read[String] and
-      (__ \ "NO2").read[String] and
-      (__ \ "WindSpeed").read[String] and
-      (__ \ "WindDirec").read[String] and
-      (__ \ "PublishTime").read[String])(EpaRealtimeData.apply _)
-
+  implicit val epaRealtimeRead = Json.reads[EpaRealtimeData]
   
   def index = Action {
     implicit request =>
@@ -85,7 +70,7 @@ object Application extends Controller {
   def commonIndex = Action.async {
     implicit request =>
       {
-        val url = "http://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-001805/?format=json&token=00k8zvmeJkieHA9w13JvOw"
+        val url = "https://opendata.epa.gov.tw/webapi/api/rest/datastore/355000000I-000259/?format=json&token=00k8zvmeJkieHA9w13JvOw"
         WS.url(url).get().map {
           response =>
             try {
